@@ -18,7 +18,7 @@ function Question() {
 
   return (
     <div className='questions'>
-    <h2 className='text-light'>Simple Question 1</h2>
+    <h2 className='text-light'>{question.question}</h2>
 
     <ul key={question.id}>
 

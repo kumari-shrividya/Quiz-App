@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Questions from './Question'
+
+// redux store import
+import {useSelector} from 'react-redux'
 
 function Quiz() {
 
-	// next button event handler
-  function onNext(){
-    console.log('on next click')
-  }
+  const  state =useSelector(state=>state)
 
-  // next button event handler
-  function onPrev(){
-    console.log('on Prev click')
-  }
+  useEffect(()=>{
+    console.log(state)
+  })
 
-  return (
+		// next button event handler
+		function onNext(){
+    		console.log('on next click')
+ 	 }
+
+ 	 // prev button event handler
+  		function onPrev(){
+   	 		console.log('on Prev click')
+  		}
+
+  	return (
     <div className='container'>
       <h1 className='title text-light'>Quiz Application</h1>
 
@@ -27,7 +36,7 @@ function Quiz() {
       </div>
 
       </div>
-  )
+  	)
 }
 
 export default Quiz
