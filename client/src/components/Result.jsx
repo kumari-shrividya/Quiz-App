@@ -1,13 +1,15 @@
 import React from 'react'
 import '../styles/result.css'
 import {Link} from 'react-router-dom'
+import ResultTable from './ResultTable'
 
  function Result() {
 
 	function onRestart(){
 		console.log('on Restart')
 	}
-  return (
+
+   	return (
     <div className='container'>
       <h1 className='title text-light'>Quiz Application</h1>
       
@@ -47,6 +49,11 @@ import {Link} from 'react-router-dom'
 	  <div className='start'>
 		<Link className='btn' to={'/'} onClick={onRestart}>Restart</Link>
 	  </div>
+
+   		 <div className="container">
+			{/* Result Table */}
+		<ResultTable/>
+   		 </div>
      </div>
   )
 }

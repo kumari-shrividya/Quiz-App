@@ -1,5 +1,7 @@
 import React, { useState,useEffect } from 'react'
 import data from '../database/data'
+
+
 function Question() {
 
     const [checked,setChecked]=useState(false)
