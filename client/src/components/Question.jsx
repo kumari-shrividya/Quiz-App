@@ -1,14 +1,25 @@
 import React, { useState,useEffect } from 'react'
 import data from '../database/data'
 
+/** custom hook */
+import { useFetchQuestion } from '../hooks/FetchQuestion'
+import { useSelector } from 'react-redux'
 
 function Question() {
 
     const [checked,setChecked]=useState(false)
+    const [{isLoading, apiData,serverError }] = useFetchQuestion()
     const question=data[0]
 
+    const questions=useSelector(state => state.questions.queue[state.questions.trace])
+
+    const trace=useSelector(state => state.questions.trace)
     useEffect(()=>{
-      console.log(question)
+      // console.log(isLoading)
+     // console.log(apiData)
+      // console.log(isLoading)
+        //console.log(trace)
+      console.log(questions)
     })
 
     function onSelect(){
@@ -18,12 +29,12 @@ function Question() {
 
   return (
     <div className='questions'>
-    <h2 className='text-light'>{question.question}</h2>
+    <h2 className='text-light'>{questions?.question}</h2>
 
-    <ul key={question.id}>
+    <ul key={questions?.id}>
 
       {
-        question.options.map((q,i)=>(
+        questions?.options.map((q,i)=>(
 
           <li key={i}>
           <input 

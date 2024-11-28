@@ -1,24 +1,67 @@
 
 /** fetch question hook to fetch api data and set value to store */
 
-import { useState } from "react"
+import { useState,useEffect } from "react"
+import { useDispatch } from "react-redux"
+import data from "../database/data"
 
-export const useFetchQuestion = ()=>{
+/** redux actions */
 
-const [getData,setGetData] =  useState({isLoading : false, apiData : [], serverError : null})
+import * as Action from '../redux/question_reducer'
 
-useEffect( ()=>{
-    setGetData( prev => ({...prev,isLoading : true}))
+export const useFetchQuestion = () => {
+    const dispatch = useDispatch();   
+    const [getData, setGetData] = useState({ isLoading : false, apiData : [], serverError: null});
 
-    /** async function fetch backend data */
-    (async () => {
-        try{
+    useEffect(() => {
+        setGetData(prev => ({...prev, isLoading : true}));
 
-        }catch(error){
-            setGetData(prev => ({...prev,isLoading : false}))
-            setGetData(prev => ({serverError : error}))
-        }
-    })();
-})
+        /** async function fetch backend data */
+        (async () => {
+            try {
+                // const [{ questions, answers }] = await getServerData(`${process.env.REACT_APP_SERVER_HOSTNAME}/api/questions`, (data) => data)
+                const questions = await data;
+                
+                if(questions.length > 0){
+                    setGetData(prev => ({...prev, isLoading : false}));
+                    setGetData(prev => ({...prev, apiData : questions}));
 
+                    /** dispatch an action */
+                    dispatch(Action.startExamAction(questions))
+
+                } else{
+                    throw new Error("No Question Avalibale");
+                }
+            } catch (error) {
+                setGetData(prev => ({...prev, isLoading : false}));
+                setGetData(prev => ({...prev, serverError : error}));
+            }
+        })();
+    }, [dispatch]);
+
+    return [getData, setGetData];
+}
+
+/**MoveAction Dispatch function */
+
+/** dispatch can call only inside a hook , to call
+ *  it inside a function use another async function and pass dispatch as argument */
+
+export const MoveNextQuestion = () => async (dispatch) => {
+    try{
+
+        dispatch(Action.moveNextAction());/** increase trace by 1 */
+
+    }catch(error){
+        console.log(error)
+    }
+}
+export const MovePrevQuestion = () => async (dispatch) => {
+    try{
+
+        dispatch(Action.movePrevAction());/** decrease trace by 1 */
+
+    }catch(error){
+        console.log(error)
+    }
 }

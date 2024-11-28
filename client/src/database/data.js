@@ -10,7 +10,7 @@ export default [
 },
 {
 id:2,
-    question:"javascript is an ------------language",
+    question:"C++ is an ------------language",
     options:[
         'object-oriented',
         'object-based',
@@ -19,7 +19,7 @@ id:2,
 },
 {
     id:3,
-    question:"javascript is an ------------language",
+    question:"Java is an ------------language",
     options:[
         'object-oriented',
         'object-based',
