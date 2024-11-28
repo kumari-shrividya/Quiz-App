@@ -5,7 +5,7 @@ import data from '../database/data'
 import { useFetchQuestion } from '../hooks/FetchQuestion'
 import { useSelector } from 'react-redux'
 
-function Question() {
+function Question({onChecked}) {
 
     const [checked,setChecked]=useState(false)
     const [{isLoading, apiData,serverError }] = useFetchQuestion()
@@ -22,9 +22,10 @@ function Question() {
       console.log(questions)
     })
 
-    function onSelect(){
-        setChecked(true)
-        console.log('radio btn change')
+    function onSelect(i){
+      //  setChecked(true)
+        onChecked(i)
+       // console.log('radio btn change' + i)
     }
 
   return (
@@ -42,7 +43,7 @@ function Question() {
            value={false}
            name='Options'
            id={`q${i}-option`}
-           onChange={onSelect}
+           onChange={()=>onSelect(i)}
            />
 
            <label className='text-primary' htmlFor={`q${i}-option`}>{q}</label>
