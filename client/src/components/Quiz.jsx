@@ -20,13 +20,15 @@ function Quiz() {
 
 		// next button event handler
 		function onNext(){
-
-    		console.log('on next click')
-       		 if(trace < queue.length){
-           /** update the trace value by one  using moveNextAction */
+       		if(trace < queue.length){
+            /** update the trace value by one  using moveNextAction */
         	 dispatch(MoveNextQuestion())
-
-		 	dispatch(PushAnswer(check))
+			
+			 /**insert new result in the array */
+			if(result.length <= trace){
+				dispatch(PushAnswer(check))
+			}
+		 	
 		}
 
     
@@ -59,7 +61,9 @@ function Quiz() {
 	  <Questions  onChecked={onChecked}/>
 	  
       <div className='grid'>
-        <buttton className='btn prev' onClick={onPrev}>Prev</buttton>
+		{
+			trace > 0 ?  <buttton className='btn prev' onClick={onPrev}>Prev</buttton> :<div></div>
+		} 
         <button className='btn next' onClick={onNext}>Next</button>
       </div>
 
