@@ -3,36 +3,33 @@ import data from '../database/data'
 
 /** custom hook */
 import { useFetchQuestion } from '../hooks/FetchQuestion'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateResultAction } from '../redux/result_reducer'
 
 function Question({onChecked}) {
 
     const [checked,setChecked]=useState(false)
     const [{isLoading, apiData,serverError }] = useFetchQuestion()
     const question=data[0]
-
     const questions=useSelector(state => state.questions.queue[state.questions.trace])
+    const { trace }=useSelector(state => state.questions)
+	const dispatch = useDispatch()
 
-    const trace=useSelector(state => state.questions.trace)
     useEffect(()=>{
-      // console.log(isLoading)
-     // console.log(apiData)
-      // console.log(isLoading)
-        //console.log(trace)
-      console.log(questions)
+     dispatch(updateResultAction({ trace , checked}))
     })
 
     function onSelect(i){
-      //  setChecked(true)
+       setChecked(i)
         onChecked(i)
-       // console.log('radio btn change' + i)
+      
     }
 
   return (
     <div className='questions'>
-    <h2 className='text-light'>{questions?.question}</h2>
+      <h2 className='text-light'>{questions?.question}</h2>
 
-    <ul key={questions?.id}>
+      <ul key={questions?.id}>
 
       {
         questions?.options.map((q,i)=>(

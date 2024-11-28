@@ -2,18 +2,25 @@ import React from 'react'
 import '../styles/result.css'
 import {Link} from 'react-router-dom'
 import ResultTable from './ResultTable'
+import { useDispatch } from 'react-redux'
+
+import { resetAllAction } from '../redux/question_reducer'
+import { resetResultAction } from '../redux/result_reducer'
 
  function Result() {
+    const dispatch = useDispatch()
 
 	function onRestart(){
-		console.log('on Restart')
+        dispatch(resetAllAction())
+        dispatch(resetResultAction)
+		//console.log('on Restart')
 	}
 
-   	return (
-    <div className='container'>
-      <h1 className='title text-light'>Quiz Application</h1>
+    	return (
+     <div className='container'>
+       <h1 className='title text-light'>Quiz Application</h1>
       
-     <div className='result flex-center'>
+      <div className='result flex-center'>
 
         <div className='flex'>
           <span>UserName</span>
