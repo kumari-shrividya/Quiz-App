@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import Questions from './Question'
-import { MoveNextQuestion ,MovePrevQuestion} from '../hooks/FetchQuestion'
+import { MoveNextQuestion, MovePrevQuestion} from '../hooks/FetchQuestion'
 import { PushAnswer } from '../hooks/setResult'
 // redux store import
 import {useSelector,useDispatch} from 'react-redux'
@@ -14,25 +14,26 @@ function Quiz() {
   const {queue, trace} = useSelector(state => state.questions);
   const dispatch = useDispatch()
  
- 	 useEffect(()=>{
-    	console.log(state)
- 	 })
+ 	//  useEffect(()=>{
+    // 	console.log(state)
+ 	//  })
 
 		// next button event handler
 		function onNext(){
        		if(trace < queue.length){
-            /** update the trace value by one  using moveNextAction */
-        	 dispatch(MoveNextQuestion())
+            	/** update the trace value by one  using moveNextAction */
+        	 	dispatch(MoveNextQuestion())
 			
-			 /**insert new result in the array */
-			if(result.length <= trace){
+			 	/**insert new result in the array */
+				if(result.length <= trace){
 				dispatch(PushAnswer(check))
-			}
+				}
 		 	
-		}
-
+			}
+			/**reset value of checked variable */
+			setChecked(undefined)
     
- 	 }
+ 	 	}
 
  	 	// prev button event handler
   		function onPrev(){
@@ -44,9 +45,10 @@ function Quiz() {
   		}
 
 		function onChecked(check){
-			console.log(check)
+			// console.log(check)
 			setChecked(check)
 		}
+
 		/**finish exam after last question */
 			if(result.length && result.length >= queue.length){
 				return <Navigate to={'/result'} replace='true'></Navigate>

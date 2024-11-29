@@ -12,10 +12,12 @@ export const questionReducer = createSlice({
         trace : 0
     },
     reducers : {
-        startExamAction : (state,action)=>{
-            return {
+        startExamAction : (state, action)=>{
+            let {questions, answers} = action.payload
+             return {
                 ...state,
-                queue : action.payload
+                queue : questions,
+                answers
             }
         },
         moveNextAction : (state) => {

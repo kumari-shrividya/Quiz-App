@@ -1,18 +1,27 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import '../styles/result.css'
 import {Link} from 'react-router-dom'
 import ResultTable from './ResultTable'
-import { useDispatch } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { attempts_Number, earnPoints_Number } from '../helper/helper'
 import { resetAllAction } from '../redux/question_reducer'
 import { resetResultAction } from '../redux/result_reducer'
 
  function Result() {
     const dispatch = useDispatch()
+	const {questions : {queue, answers}, result : {result, userId} } = useSelector(state => state)
+
+	useEffect(() => {
+		console.log(earnPoints)
+	})
+
+	const totalPoints = queue.length * 10;
+	const attempts = attempts_Number(result)
+	const earnPoints = earnPoints_Number(result, answers)
 
 	function onRestart(){
         dispatch(resetAllAction())
-        dispatch(resetResultAction)
+        dispatch(resetResultAction())
 		//console.log('on Restart')
 	}
 

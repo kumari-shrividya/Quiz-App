@@ -6,26 +6,29 @@ import { useFetchQuestion } from '../hooks/FetchQuestion'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateResult } from '../hooks/setResult'
 
-function Question({onChecked}) {
+function Question({ onChecked }) {
 
-    const [checked,setChecked]=useState(false)
+    const [checked,setChecked] = useState(null)
     const [{isLoading, apiData,serverError }] = useFetchQuestion()
-    const question=data[0]
-    const questions=useSelector(state => state.questions.queue[state.questions.trace])
-    const { trace }=useSelector(state => state.questions)
+    // const question = data[0]
+
+    const questions = useSelector(state => state.questions.queue[state.questions.trace])
+    const { trace } = useSelector(state => state.questions)
 	const result = useSelector(state=>state.result.result)
 	const dispatch = useDispatch()
 
     useEffect(() => {
-
+		if (checked !== null) {
      	dispatch(updateResult({ trace , checked}))
+		}
     }, [checked])
 
     function onSelect(i){
-       setChecked(i)
-        onChecked(i)
-		dispatch(updateResult({ trace , checked}))
-      
+	  onChecked(i)
+      setChecked(i)
+	  if (checked !== null) {
+      dispatch(updateResult({ trace , checked}))
+	  }
     }
 
   return (

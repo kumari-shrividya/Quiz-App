@@ -1,5 +1,6 @@
 import * as Action from '../redux/result_reducer'
 
+
 export const PushAnswer = (result) => async (dispatch) => {
     try{
         await dispatch(Action.pushResultAction(result))
@@ -10,10 +11,12 @@ export const PushAnswer = (result) => async (dispatch) => {
     }
 }
 
+
 export const updateResult = (index) => async (dispatch) => {
-    try{
-        dispatch(Action.updateResultAction(index))
-    }catch(error){
+    
+    try {
+      await  dispatch(Action.updateResultAction(index));
+    } catch (error) {
         console.log(error)
     }
 }

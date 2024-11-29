@@ -27,3 +27,5 @@ id:2,
     ]
 }
 ]
+/**store all correct answers */
+export const answers = [0, 0, 0]

@@ -13,12 +13,12 @@ export const resultReducer=createSlice({
         },
         pushResultAction : (state,action) => {
             state.result.push(action.payload)
-        }
-    },
-        updateResultAction : (state,action) =>{
-            const [ trace, checked ] = action.payload;
-            state.result.fill(checked, trace, trace + 1)
-
+        },
+    // },
+   
+    updateResultAction : (state, action) => {
+        const { trace, checked } = action.payload;
+        state.result.fill(checked, trace, trace + 1)
     },
         resetResultAction : (state) =>{
          return{
@@ -26,6 +26,8 @@ export const resultReducer=createSlice({
             result : []
         }
     }
+
+   }
 })
 
 export const { setUserId ,pushResultAction ,resetResultAction, updateResultAction} = resultReducer.actions;
