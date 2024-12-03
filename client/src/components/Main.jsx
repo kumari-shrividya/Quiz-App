@@ -5,6 +5,9 @@ import '../styles/Main.css'
 function Main() {
     const inputRef=useRef(null)
 
+
+
+    
   return (
     <div className='container'>
         <h1 className='title text-light'>Quiz Application</h1>
@@ -20,7 +23,7 @@ function Main() {
             <input  ref={inputRef} type='text' className='userid' placeholder='UserName*'/>
         </form>
         <div className='start'>
-        <Link className='btn' to={'quiz'}>Start Quiz</Link>
+        <Link className='btn' to={'quiz'} onClick={startQuiz}>Start Quiz</Link>
         </div>
     </div>
   )
