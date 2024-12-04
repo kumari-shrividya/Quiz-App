@@ -12,10 +12,11 @@ function Question({ onChecked }) {
     const [{isLoading, apiData,serverError }] = useFetchQuestion()
     // const question = data[0]
 
-    const questions = useSelector(state => state.questions.queue[state.questions.trace])
-    const { trace } = useSelector(state => state.questions)
-	const result = useSelector(state=>state.result.result)
-	const dispatch = useDispatch()
+      const questions = useSelector(state => state.questions.queue[state.questions.trace])
+      const { trace } = useSelector(state => state.questions)
+	  const result = useSelector(state=>state.result.result)
+	   useSelector(state=>console.log(state))
+	  const dispatch = useDispatch()
 
     useEffect(() => {
 		if (checked !== null) {
