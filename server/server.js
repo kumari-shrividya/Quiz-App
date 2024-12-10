@@ -12,8 +12,7 @@ app.use(express.json())
 config();
 
 /** application port */
-
-const port = process.env.PORT
+const port = process.env.PORT || 8000
 
 /** routes  */
 app.get('/', (req,res) => {
