@@ -22,3 +22,8 @@ export async function insertQuestions(req, res){
  export async  function postResult(req, res){
     res.json('result  api  post result')
  }
+
+ /** delete result  */
+ export async  function deleteResult(req, res){
+    res.json('result  api  delete result')
+ }
